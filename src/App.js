@@ -16,7 +16,6 @@ class App extends Component {
     }
   }
   render() {
-    { console.log('peer', this.props.peer) }
     return (
       <div className="App">
         <Header />
