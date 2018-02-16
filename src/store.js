@@ -1,6 +1,8 @@
 import { createStore } from 'redux';
 import Peer from 'peerjs';
 
+import getLocalStream from './getLocalStream';
+
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'INIT_PEER': {
@@ -9,9 +11,15 @@ const reducer = (state = {}, action) => {
       return { ...state, peer };
     }
     case 'OPEN': {
-      console.log('in opne')
       const { id } = action;
       return { ...state, id }; 
+    }
+    case 'SEND_CALL': {
+      const { id } = action;
+      const localStream = getLocalStream();
+      console.log('localStream', localStream);
+      const call = state.peer.call(id, localStream);
+      return { ...state, call };
     }
     default: 
       return state;
