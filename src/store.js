@@ -1,10 +1,17 @@
 import { createStore } from 'redux';
+import Peer from 'peerjs';
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
+    case 'INIT_PEER': {
+      const peer = new Peer({ key: 'lwjd5qra8257b9' });
+      //peer.on('open', 
+      return { ...state, peer };
+    }
     case 'OPEN': {
-      const { peer, id } = action;
-      return { ...state, peer, id }; 
+      console.log('in opne')
+      const { id } = action;
+      return { ...state, id }; 
     }
     default: 
       return state;

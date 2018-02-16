@@ -8,10 +8,15 @@ import Video from './Video';
 
 class App extends Component {
   componentDidMount() {
-    const peer = new Peer({ key: 'lwjd5qra8257b9' });
-    peer.on('open', (id) => this.props.open(peer, id));
+    this.props.initPeer();  
+  } 
+  componentWillUpdate(nextProps) {
+    if (nextProps.peer) {
+      nextProps.peer.on('open', this.props.open);
+    }
   }
   render() {
+    { console.log('peer', this.props.peer) }
     return (
       <div className="App">
         <Header />
@@ -22,11 +27,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
-const open = (peer, id) => ({
+const mapStateToProps = ({ peer }) => ({ peer });
+const initPeer = () => ({ type: 'INIT_PEER' });
+const open = (id) => ({
   type: 'OPEN',
-  peer,
   id
 });
 
-export default connect(mapStateToProps, { open })(App);
+export default connect(mapStateToProps, { initPeer, open })(App);
