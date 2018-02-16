@@ -1,11 +1,6 @@
 import { createStore } from 'redux';
 
 const reducer = (state = {}, action) => {
-  console.log('state')
-  console.log(state)
-  console.log('action')
-  console.log(action)
-  console.log('');
   switch (action.type) {
     case 'OPEN': {
       const { peer, id } = action;
@@ -16,4 +11,7 @@ const reducer = (state = {}, action) => {
   }
 };
 
-export default createStore(reducer);
+export default createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);

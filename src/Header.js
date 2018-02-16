@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Header = (props) => (
   <header className="App-header">
@@ -6,4 +7,6 @@ const Header = (props) => (
   </header>
 );
 
-export default Header;
+const mapStateToProps = ({ id }) => ({ id });
+
+export default connect(mapStateToProps)(Header);
